@@ -12,7 +12,7 @@ library.add(faFileExport)
 
 function SearchUserComponent() {
 
-    const dbEndPoint = "http://localhost:3000/create/user"
+    const dbEndPoint = "http://localhost:3000/user"
 
     let [inputUser, setInputUser] = useState("");
     let [loading, setLoading] = useState(false);
@@ -71,7 +71,7 @@ function SearchUserComponent() {
                 toast.success("¡Usuario exportado exitosamente!");
             })
             .catch((error) => {
-                console.log("ErrorRegisterDB: ",error);
+                console.log("Catch final, error: ",error);
                 toast.error('Ups, no pudimos exportar el usuario. ¡Intenta nuevamente!');
             });
     }

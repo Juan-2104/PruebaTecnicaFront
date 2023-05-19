@@ -71,7 +71,7 @@ function SearchUserComponent() {
                 toast.success("¡Usuario exportado exitosamente!");
             })
             .catch((error) => {
-                console.log("ErrorRegisterDB: ",error);
+                console.log("Erro: ",error);
                 toast.error('Ups, no pudimos exportar el usuario. ¡Intenta nuevamente!');
             });
     }

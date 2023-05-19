@@ -8,11 +8,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import Charts from '../charts/charts'
 import './searchUser.css'
 import 'react-toastify/dist/ReactToastify.css';
-library.add(faFileExport)
 
 function SearchUserComponent() {
 
-    const dbEndPoint = "http://localhost:3000/create/user"
+    const dbEndPoint = "http://localhost:3000/user"
 
     let [inputUser, setInputUser] = useState("");
     let [loading, setLoading] = useState(false);
@@ -71,7 +70,7 @@ function SearchUserComponent() {
                 toast.success("¡Usuario exportado exitosamente!");
             })
             .catch((error) => {
-                console.log("ErrorRegisterDB: ",error);
+                console.log(error);
                 toast.error('Ups, no pudimos exportar el usuario. ¡Intenta nuevamente!');
             });
     }

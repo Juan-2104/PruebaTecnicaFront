@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+const axios = require('axios');
 import SearchIcon from '../../search-square-svgrepo-com.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect, useState } from 'react';
@@ -52,26 +53,15 @@ function SearchUserComponent() {
     const handleExportClick = (user) => {
         console.log('Exporting user:', user);
         console.log("body: ", JSON.stringify(user));
-        fetch(dbEndPoint, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(user),
+        axios.post('http://localhost:3000/create/user', 'Exporting user:', user, headers = {
+            'Content-Type': 'application/json',
         })
-            .then(res => {
-                if (!res.ok) {
-                    console.log("Fallo registro en DB: ", res);
-                    toast.error('Ups, no pudimos exportar el usuario. ¡Intenta nuevamente!');
-                }
-                return res.json();
-            })
-            .then(data => {
-                console.log('User exported:', data);
+            .then(function (response) {
+                console.log({ response });
                 toast.success("¡Usuario exportado exitosamente!");
             })
-            .catch((error) => {
-                console.log("ErrorRegisterDB: ",error);
+            .catch(function (error) {
+                console.log({ error });
                 toast.error('Ups, no pudimos exportar el usuario. ¡Intenta nuevamente!');
             });
     }

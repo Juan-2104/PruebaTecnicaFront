@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import SearchIcon from '../../search-square-svgrepo-com.png';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useEffect, useState } from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faFileExport } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import Charts from '../charts/charts'
 import './searchUser.css'
@@ -11,9 +11,6 @@ import 'react-toastify/dist/ReactToastify.css';
 library.add(faFileExport)
 
 function SearchUserComponent() {
-
-    const dbEndPoint = "http://localhost:3000/create/user"
-
     let [inputUser, setInputUser] = useState("");
     let [loading, setLoading] = useState(false);
     let [userInf, setUser] = useState();
@@ -51,28 +48,19 @@ function SearchUserComponent() {
 
     const handleExportClick = (user) => {
         console.log('Exporting user:', user);
-        console.log("body: ", JSON.stringify(user));
-        fetch(dbEndPoint, {
+        fetch('/api/exportUser', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(user),
         })
-            .then(res => {
-                if (!res.ok) {
-                    console.log("Fallo registro en DB: ", res);
-                    toast.error('Ups, no pudimos exportar el usuario. ¡Intenta nuevamente!');
-                }
-                return res.json();
-            })
+            .then(response => response.json())
             .then(data => {
                 console.log('User exported:', data);
-                toast.success("¡Usuario exportado exitosamente!");
             })
             .catch((error) => {
-                console.log("ErrorRegisterDB: ",error);
-                toast.error('Ups, no pudimos exportar el usuario. ¡Intenta nuevamente!');
+                console.error('Error exporting user:', error);
             });
     }
 
@@ -86,7 +74,9 @@ function SearchUserComponent() {
             <div>
                 {userInf && userInf.slice(0, 10).map((userInf, index) => (
                     <div key={index}>
-                        <button className="exp-button" onClick={() => handleExportClick(userInf)}><FontAwesomeIcon icon={['solid', 'file-export']} /> Exportar</button>
+                        <button className="back-button" onClick={() => handleExportClick(userInf)}>
+                            <FontAwesomeIcon icon={['solid', 'file-export']} />
+                        </button>
                         <Link to={`/user/${userInf.login}`}>{userInf.login}</Link>  ID de usuario: {userInf.id}
                         <p></p>
                     </div>

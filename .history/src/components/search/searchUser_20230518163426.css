@@ -62,16 +62,3 @@ a:active {
     background: #89d0ff;
     color: #98a1e4;
 }
-
-.exp-button {
-    margin: 5px;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    color: #000;
-    font-size: 15px;
-}
-
-.exp-button:hover {
-    color: #777;
-}

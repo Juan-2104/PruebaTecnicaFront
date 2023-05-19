@@ -52,50 +52,38 @@ function SearchUserComponent() {
     const handleExportClick = (user) => {
         console.log('Exporting user:', user);
         console.log("body: ", JSON.stringify(user));
-        fetch(dbEndPoint, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(user),
+        axios.post('http://localhost:3000/create/user', 'Exporting user:', user, headers = {
+            'Content-Type': 'application/json',
         })
-            .then(res => {
-                if (!res.ok) {
-                    console.log("Fallo registro en DB: ", res);
-                    toast.error('Ups, no pudimos exportar el usuario. ¡Intenta nuevamente!');
-                }
-                return res.json();
-            })
-            .then(data => {
-                console.log('User exported:', data);
+            .then(function (response) {
+                console.log({ response });
                 toast.success("¡Usuario exportado exitosamente!");
             })
-            .catch((error) => {
-                console.log("ErrorRegisterDB: ",error);
+            .catch(function (error) {
+                console.log({ error });
                 toast.error('Ups, no pudimos exportar el usuario. ¡Intenta nuevamente!');
             });
+
+        return (
+            <div>
+                <h1>Consulta de usuarios</h1>
+                <div className="main-container">
+                    <input type='text' onChange={(e) => setInputUser(e.target.value)}></input>
+                    <button className='button' onClick={searchUser}><img src={SearchIcon} className='searchButton' alt="Search" /></button>
+                </div>
+                <div>
+                    {userInf && userInf.slice(0, 10).map((userInf, index) => (
+                        <div key={index}>
+                            <button className="exp-button" onClick={() => handleExportClick(userInf)}><FontAwesomeIcon icon={['solid', 'file-export']} /> Exportar</button>
+                            <Link to={`/user/${userInf.login}`}>{userInf.login}</Link>  ID de usuario: {userInf.id}
+                            <p></p>
+                        </div>
+                    ))}
+                </div>
+                {!loading && userInf && userInf.length > 0 && <Charts userInf={userInf} options={{ maintainAspectRatio: false }} />}
+                <ToastContainer />
+            </div>
+        );
     }
 
-    return (
-        <div>
-            <h1>Consulta de usuarios</h1>
-            <div className="main-container">
-                <input type='text' onChange={(e) => setInputUser(e.target.value)}></input>
-                <button className='button' onClick={searchUser}><img src={SearchIcon} className='searchButton' alt="Search" /></button>
-            </div>
-            <div>
-                {userInf && userInf.slice(0, 10).map((userInf, index) => (
-                    <div key={index}>
-                        <button className="exp-button" onClick={() => handleExportClick(userInf)}><FontAwesomeIcon icon={['solid', 'file-export']} /> Exportar</button>
-                        <Link to={`/user/${userInf.login}`}>{userInf.login}</Link>  ID de usuario: {userInf.id}
-                        <p></p>
-                    </div>
-                ))}
-            </div>
-            {!loading && userInf && userInf.length > 0 && <Charts userInf={userInf} options={{ maintainAspectRatio: false }} />}
-            <ToastContainer />
-        </div>
-    );
-}
-
-export default SearchUserComponent;
+    export default SearchUserComponent;

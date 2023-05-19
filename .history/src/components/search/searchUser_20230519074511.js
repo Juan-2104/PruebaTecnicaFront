@@ -2,17 +2,14 @@ import { Link } from 'react-router-dom';
 import SearchIcon from '../../search-square-svgrepo-com.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect, useState } from 'react';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faFileExport } from '@fortawesome/free-solid-svg-icons'
 import { ToastContainer, toast } from 'react-toastify';
 import Charts from '../charts/charts'
 import './searchUser.css'
 import 'react-toastify/dist/ReactToastify.css';
-library.add(faFileExport)
 
 function SearchUserComponent() {
 
-    const dbEndPoint = "http://localhost:3000/create/user"
+    const dbEndPoint = "http://localhost:3000/user"
 
     let [inputUser, setInputUser] = useState("");
     let [loading, setLoading] = useState(false);
@@ -59,19 +56,14 @@ function SearchUserComponent() {
             },
             body: JSON.stringify(user),
         })
-            .then(res => {
-                if (!res.ok) {
-                    console.log("Fallo registro en DB: ", res);
-                    toast.error('Ups, no pudimos exportar el usuario. ¡Intenta nuevamente!');
-                }
-                return res.json();
-            })
+            .then(response => {
+                response.json())
             .then(data => {
                 console.log('User exported:', data);
                 toast.success("¡Usuario exportado exitosamente!");
             })
             .catch((error) => {
-                console.log("ErrorRegisterDB: ",error);
+                console.log(error);
                 toast.error('Ups, no pudimos exportar el usuario. ¡Intenta nuevamente!');
             });
     }

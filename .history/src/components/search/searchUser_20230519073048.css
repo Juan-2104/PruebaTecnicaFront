@@ -63,15 +63,18 @@ a:active {
     color: #98a1e4;
 }
 
-.exp-button {
-    margin: 5px;
+.back-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 20px;
     background-color: transparent;
     border: none;
     cursor: pointer;
     color: #000;
-    font-size: 15px;
+    font-size: 20px;
 }
 
-.exp-button:hover {
+.back-button:hover {
     color: #777;
 }

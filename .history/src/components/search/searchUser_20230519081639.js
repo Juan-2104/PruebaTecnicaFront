@@ -57,7 +57,7 @@ function SearchUserComponent() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(user),
+            data: JSON.stringify(user),
         })
             .then(res => {
                 if (!res.ok) {
@@ -71,7 +71,7 @@ function SearchUserComponent() {
                 toast.success("¡Usuario exportado exitosamente!");
             })
             .catch((error) => {
-                console.log("ErrorRegisterDB: ",error);
+                console.log("Catch final, error: ",error);
                 toast.error('Ups, no pudimos exportar el usuario. ¡Intenta nuevamente!');
             });
     }

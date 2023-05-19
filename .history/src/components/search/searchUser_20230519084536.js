@@ -52,12 +52,13 @@ function SearchUserComponent() {
     const handleExportClick = (user) => {
         console.log('Exporting user:', user);
         console.log("body: ", JSON.stringify(user));
+        
         fetch(dbEndPoint, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(user),
+            body: user,
         })
             .then(res => {
                 if (!res.ok) {

@@ -57,7 +57,7 @@ function SearchUserComponent() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(user),
+            body: user),
         })
             .then(res => {
                 if (!res.ok) {

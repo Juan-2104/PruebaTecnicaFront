@@ -12,7 +12,7 @@ library.add(faFileExport)
 
 function SearchUserComponent() {
 
-    const dbEndPoint = "http://localhost:3000/create/user"
+    const dbEndPoint = "http://localhost:3000/user"
 
     let [inputUser, setInputUser] = useState("");
     let [loading, setLoading] = useState(false);
@@ -57,7 +57,7 @@ function SearchUserComponent() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(user),
+            body: JSON.stringify(user)),
         })
             .then(res => {
                 if (!res.ok) {
@@ -71,7 +71,7 @@ function SearchUserComponent() {
                 toast.success("¡Usuario exportado exitosamente!");
             })
             .catch((error) => {
-                console.log("ErrorRegisterDB: ",error);
+                console.log(error);
                 toast.error('Ups, no pudimos exportar el usuario. ¡Intenta nuevamente!');
             });
     }

@@ -2,17 +2,14 @@ import { Link } from 'react-router-dom';
 import SearchIcon from '../../search-square-svgrepo-com.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect, useState } from 'react';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faFileExport } from '@fortawesome/free-solid-svg-icons'
 import { ToastContainer, toast } from 'react-toastify';
 import Charts from '../charts/charts'
 import './searchUser.css'
 import 'react-toastify/dist/ReactToastify.css';
-library.add(faFileExport)
 
 function SearchUserComponent() {
 
-    const dbEndPoint = "http://localhost:3000/create/user"
+    const dbEndPoint = "http://localhost:3000/user"
 
     let [inputUser, setInputUser] = useState("");
     let [loading, setLoading] = useState(false);
@@ -51,7 +48,6 @@ function SearchUserComponent() {
 
     const handleExportClick = (user) => {
         console.log('Exporting user:', user);
-        console.log("body: ", JSON.stringify(user));
         fetch(dbEndPoint, {
             method: 'POST',
             headers: {
@@ -59,19 +55,13 @@ function SearchUserComponent() {
             },
             body: JSON.stringify(user),
         })
-            .then(res => {
-                if (!res.ok) {
-                    console.log("Fallo registro en DB: ", res);
-                    toast.error('Ups, no pudimos exportar el usuario. ¡Intenta nuevamente!');
-                }
-                return res.json();
-            })
+            .then(response => response.json())
             .then(data => {
                 console.log('User exported:', data);
                 toast.success("¡Usuario exportado exitosamente!");
             })
             .catch((error) => {
-                console.log("ErrorRegisterDB: ",error);
+                console.log(error);
                 toast.error('Ups, no pudimos exportar el usuario. ¡Intenta nuevamente!');
             });
     }
@@ -86,8 +76,10 @@ function SearchUserComponent() {
             <div>
                 {userInf && userInf.slice(0, 10).map((userInf, index) => (
                     <div key={index}>
-                        <button className="exp-button" onClick={() => handleExportClick(userInf)}><FontAwesomeIcon icon={['solid', 'file-export']} /> Exportar</button>
                         <Link to={`/user/${userInf.login}`}>{userInf.login}</Link>  ID de usuario: {userInf.id}
+                        <button className="back-button" onClick={() => handleExportClick(userInf)}>
+                            Exportar <FontAwesomeIcon icon={['solid', 'file-export']} />
+                        </button>
                         <p></p>
                     </div>
                 ))}

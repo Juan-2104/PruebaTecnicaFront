@@ -52,12 +52,20 @@ function SearchUserComponent() {
     const handleExportClick = (user) => {
         console.log('Exporting user:', user);
         console.log("body: ", JSON.stringify(user));
+        axios.post('http://localhost:3000/create/user', 'Exporting user:', user)
+            .then(function (response) {
+                console.log({ response });
+                toast.success("¡Usuario exportado exitosamente!");
+            })
+            .catch(function (error) {
+                console.log({ error });
+            });
         fetch(dbEndPoint, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(user),
+            body: user,
         })
             .then(res => {
                 if (!res.ok) {
@@ -68,11 +76,11 @@ function SearchUserComponent() {
             })
             .then(data => {
                 console.log('User exported:', data);
-                toast.success("¡Usuario exportado exitosamente!");
+
             })
             .catch((error) => {
-                console.log("ErrorRegisterDB: ",error);
-                toast.error('Ups, no pudimos exportar el usuario. ¡Intenta nuevamente!');
+                console.log("ErrorRegisterDB: ", error);
+
             });
     }
 
