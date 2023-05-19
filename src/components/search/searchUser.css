@@ -1,0 +1,64 @@
+.App {
+    text-align: center;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.button {
+    height: 40px;
+    width: 40px;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    border-radius: 80%;
+    margin-left: 10px;
+}
+
+.searchButton {
+    height: 100%;
+    width: 100%;
+    border-radius: 80%;
+    transition: box-shadow 0.3s ease;
+}
+
+.searchButton:hover {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.searchButton:active {
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
+.main-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 25px;
+}
+
+a {
+    outline: none;
+    text-decoration: none;
+    padding: 2px 1px 0;
+}
+
+a:link {
+    color: #7ec1ff;
+}
+
+a:visited {
+    color: #7ec1ff;
+}
+
+a:focus {
+    border-bottom: 1px solid;
+    background: #98a1e4;
+}
+
+
+a:active {
+    background: #89d0ff;
+    color: #98a1e4;
+}

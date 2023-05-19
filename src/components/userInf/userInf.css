@@ -1,0 +1,41 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.back-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 20px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #000;
+    font-size: 20px;
+}
+
+.back-button:hover {
+    color: #777;
+}
+
+.user-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.user-container {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 50px;
+}
+
+.user-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.user-info {
+    margin-left: 20px;
+}
