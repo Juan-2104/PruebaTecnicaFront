@@ -14,7 +14,7 @@
 
 1. Bajar el repositorio.
 2. Instalar las dependencias del package JSON. // cmd: npm install
-3. (Recomendación) Ejecutar la aplicación en un puerto diferente al puerto 3000. // cmd: npm start
+3. Ejecutar la aplicación en un puerto diferente al puerto 3000. // cmd: npm start
 4. Abrir: http://localhost:{puertoSeleccionado}/
 
 # Nota
